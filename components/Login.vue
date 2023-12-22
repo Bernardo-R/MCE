@@ -8,46 +8,69 @@
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form class="space-y-6" action="#" method="POST">
-                <div>
-                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
-                    <div class="mt-2">
-                        <input id="email" name="email" type="email" autocomplete="email" required=""
-                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                    </div>
-                </div>
+            <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
+                <UFormGroup label="Email" name="email">
+                    <UInput v-model="state.email" />
+                </UFormGroup>
 
-                <div>
-                    <div class="flex items-center justify-between">
-                        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-                        <div class="text-sm">
-                            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
-                        </div>
-                    </div>
-                    <div class="mt-2">
-                        <input id="password" name="password" type="password" autocomplete="current-password" required=""
-                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                    </div>
-                </div>
+                <UFormGroup label="Password" name="password">
+                    <UInput v-model="state.password" type="password" />
+                </UFormGroup>
 
-                <div>
-                    <button type="submit"
-                        class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign
-                        in</button>
-                </div>
-            </form>
+                <UButton type="submit"
+                    class="flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    log In
+                </UButton>
+            </UForm>
 
-            <p class="mt-10 text-center text-sm text-gray-500">
+            <!-- <p class="mt-10 text-center text-sm text-gray-500">
                 Not a member?
                 {{ ' ' }}
                 <a href="#" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Start a 14 day free
                     trial</a>
-            </p>
+            </p> -->
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import { z } from 'zod'
+import { ref } from 'vue'
+import type { FormSubmitEvent } from '#ui/types'
+
+const toast = useToast()
+
+const { login } = useFirebaseAuth()
+
+const schema = z.object({
+    email: z.string().email('Invalid email'),
+    password: z.string().min(6, 'Must be at least 8 characters')
+})
+
+type Schema = z.output<typeof schema>
+
+const state = ref({
+    email: undefined,
+    password: undefined
+})
+
+async function onSubmit(event: FormSubmitEvent<Schema>) {
+    console.log(event.data)
+
+    try {
+        await login(event.data.email, event.data.password)
+        toast.add({
+            title: 'log in successful',
+            timeout: 1000,
+            callback: async () => {
+                await navigateTo('/admin')
+            }
+        })
+
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 </script>
 
