@@ -19,7 +19,7 @@ export const useFirestore = () => {
     };
 }
 
-    const postPeople = async (people: {name: string, location: string, phone: string}) => {
+    const postPeople = async (people: {name: string, location: string, phone: string, zipcode:string, selected: string}) => {
         try {
             const docRef = await addDoc(collection($db, "ig_clients"), people);
             peoples.value = [...peoples.value, { id: docRef.id, ...people }];

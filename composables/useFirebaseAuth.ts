@@ -44,6 +44,7 @@ export const useFirebaseAuth = () => {
     return {
         login,
         signout,
-        curretnUserPromise
+        curretnUserPromise,
+        currentUser
     }
 }
