@@ -3,4 +3,5 @@
         <Navbar />
         <slot />
     </div>
+    <Footer />
 </template>

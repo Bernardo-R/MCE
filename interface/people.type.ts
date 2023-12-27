@@ -3,4 +3,6 @@ export interface People {
     name: string;
     location: string;
     phone: string;
+
+
 }
