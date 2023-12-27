@@ -61,13 +61,14 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
         await login(event.data.email, event.data.password)
         console.log('button clicked')
-        toast.add({
-            title: 'log in successful',
-            timeout: 1000,
-            callback: async () => {
-                await navigateTo('/admin')
-            }
-        })
+        await navigateTo('/admin')
+        // toast.add({
+        //     title: 'log in successful',
+        //     timeout: 1000,
+        //     callback: async () => {
+
+        //     }
+        // })
 
     } catch (error) {
         console.log(error)

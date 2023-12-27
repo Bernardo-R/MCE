@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc } from "firebase/firestore"; 
+import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore"; 
 import type { People } from "~/interface/people.type";
 
 export const useFirestore = () => {
@@ -19,7 +19,7 @@ export const useFirestore = () => {
     };
 }
 
-    const postPeople = async (people: {name: string, location: string, phone: string, zipcode:string, selected: string}) => {
+    const postPeople = async (people: {name: string, location: string, phone: string, zipcode:string, service: string}) => {
         try {
             const docRef = await addDoc(collection($db, "ig_clients"), people);
             peoples.value = [...peoples.value, { id: docRef.id, ...people }];
@@ -28,10 +28,20 @@ export const useFirestore = () => {
             console.error("Error adding document: ", error);
         }
     }
+
+    const deletePeople = async (id: string) => {
+        try {
+            await deleteDoc(doc($db, "ig_clients", id));
+            peoples.value = peoples.value.filter((people) => people.id !== id);
+        } catch (error) {
+            console.error("Error removing document: ", error);
+        }
+    }
     
     return {
         getPeoples,
         postPeople,
-        peoples
+        peoples,
+        deletePeople
     } 
 }

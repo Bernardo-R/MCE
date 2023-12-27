@@ -20,14 +20,18 @@
                     <UInput v-model="state.zipcode" type="text" />
                 </UFormGroup>
 
-                <UFormGroup label="Locacion" name="location">
-                    <USelect v-model="state.location" :options="cities" />
+                <UFormGroup label="Estado" name="location">
+                    <USelectMenu v-model="state.location" :options="cities" />
                 </UFormGroup>
 
-                <URadioGroup v-model="state.selected" legend="Elija una de nuestras opiones:" :options="options" />
+                <UFormGroup label="Para:" name="service">
+                    <USelectMenu v-model="state.service" :options="service" />
+                </UFormGroup>
+
+                <!-- <URadioGroup v-model="state.selected" legend="Elija una de nuestras opiones:" :options="options" /> -->
 
                 <UButton type="submit"
-                    class="flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500">
+                    class="flex w-full justify-center rounded-md bg-blue-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500">
                     Submit
                 </UButton>
             </UForm>
@@ -48,17 +52,13 @@ import type { FormSubmitEvent } from '#ui/types'
 
 const { postPeople } = useFirestore()
 
-const cities = ['NY', 'NJ', 'CT']
-const options = [{
-    value: 'recojer',
-    label: 'Recojer'
-}, {
-    value: 'estimado',
-    label: 'Estimado'
-}, {
-    value: 'mudanza',
-    label: 'Mudanza'
-}]
+const cities = ['NY', 'NJ', 'PA']
+const service = ['Recojer', 'Estimado', 'Mudanza']
+// const selected = [
+//     'recojer',
+//     'estimado',
+//     'mudanza'
+// ];
 
 
 const schema = z.object({
@@ -66,31 +66,35 @@ const schema = z.object({
     location: z.enum(cities),
     zipcode: z.string().min(5, 'Must be at least 5 characters'),
     phone: z.string().min(8, 'Must be at least 8 characters'),
-    selected: z.enum(options)
+    service: z.enum(service)
 })
 
 type Schema = z.output<typeof schema>
 
-const state = ref({
+const initialState = {
     name: undefined,
     zipcode: undefined,
     location: undefined,
     phone: undefined,
-    selected: 'recojer'
+    service: 'Recojer'
+}
+const state = ref({
+    ...initialState
 })
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-    try {
-        console.log("button clicked")
-        await postPeople({
-            name: event.data.name,
-            zipcode: event.data.zipcode,
-            location: event.data.location,
-            phone: event.data.phone,
-            selected: event.data.selected
-        })
-    } catch (error) {
-        console.error("Error submitting form:", error);
+    await postPeople({
+        name: event.data.name,
+        zipcode: event.data.zipcode,
+        location: event.data.location,
+        phone: event.data.phone,
+        service: event.data.service
+    })
+
+    console.log(event.data);
+    state.value = {
+        ...initialState
     }
 }
+
 </script>
