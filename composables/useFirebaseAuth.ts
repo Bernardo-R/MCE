@@ -19,13 +19,7 @@ export const useFirebaseAuth = () => {
         const toast = useToast()
         try {
             await signOut($auth)
-            toast.add( {
-                title: 'loggin Out...', 
-                timeout: 1000,
-                callback: async() =>{
-                    await navigateTo('/login')
-                }
-            } )
+            await navigateTo('/login')
         
         } catch (error) {
             console.log(error)
@@ -44,6 +38,7 @@ export const useFirebaseAuth = () => {
     return {
         login,
         signout,
-        curretnUserPromise
+        curretnUserPromise,
+        currentUser
     }
 }

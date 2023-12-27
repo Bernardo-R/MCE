@@ -3,22 +3,31 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from "firebase/firestore";
 
 export default defineNuxtPlugin((nuxtApp) => {
-    const runtimeConfig = useRuntimeConfig()
+    const {
+      apiKey,
+      authDomain,
+      projectId,
+      storageBucket,
+      messagingSenderId,
+      appId
+      
+    } = useRuntimeConfig().public
 
+    //tengo que tratar de pasar las llaves directas para ver si eso funciona
 const firebaseConfig = {
-    apiKey : runtimeConfig.firebase.apiKey,
-    authDomain : runtimeConfig.firebase.authDomain,
-    projectId : runtimeConfig.firebase.projectId,
-    storageBucket : runtimeConfig.firebase.storageBucket,
-    messagingSenderId : runtimeConfig.firebase.messagingSenderId,
-    appId : runtimeConfig.firebase.appId
+    apiKey,
+    authDomain,
+    projectId,
+    storageBucket,
+    messagingSenderId,
+    appId
   };
 
+  
+  
   const app = initializeApp(firebaseConfig)
   const auth = getAuth(app)
   const db = getFirestore(app);
-
-  
 
   return {
     provide: {
