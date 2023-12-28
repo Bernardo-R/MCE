@@ -41,11 +41,11 @@ export default defineNuxtConfig({
     "/register": { ssr: false },
   },
 
-  target: 'static',
-  ssr: false,
-  generate: {
-    fallback: true
-  },
+  // target: 'static',
+  // ssr: false,
+  // generate: {
+  //   fallback: true
+  // },
 })
 
 // apiKey: process.env.FIRE_APIKEY,
