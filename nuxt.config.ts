@@ -35,10 +35,10 @@ export default defineNuxtConfig({
     }
   },
   routeRules: {
-    // "/": { prerender: true },
-    // "/admin/**": { ssr: false },
-    // "/login": { ssr: false },
-    // "/register": { ssr: false },
+    "/": { prerender: true },
+    "/admin/**": { ssr: false },
+    "/login": { ssr: false },
+    "/register": { ssr: false },
   },
 
   target: 'static',
