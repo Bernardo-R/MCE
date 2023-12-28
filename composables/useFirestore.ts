@@ -23,7 +23,7 @@ export const useFirestore = () => {
         try {
             const docRef = await addDoc(collection($db, "ig_clients"), people);
             peoples.value = [...peoples.value, { id: docRef.id, ...people }];
-            console.log("Document written with ID: ", docRef.id);
+            // console.log("Document written with ID: ", docRef.id);
         } catch (error) {
             console.error("Error adding document: ", error);
         }

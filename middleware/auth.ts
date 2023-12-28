@@ -1,6 +1,6 @@
 export default defineNuxtRouteMiddleware(async(to, from ) => {
     if (process.server) return
-    console.log('middelware is active')
+    // console.log('middelware is active')
     
     const { curretnUserPromise } = useFirebaseAuth()
 
