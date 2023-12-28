@@ -39,7 +39,13 @@ export default defineNuxtConfig({
     "/admin/**": { ssr: false },
     "/login": { ssr: false },
     // "/register": { ssr: false },
-  }
+  },
+
+  target: 'static',
+  ssr: false,
+  generate: {
+    fallback: true
+  },
 })
 
 // apiKey: process.env.FIRE_APIKEY,

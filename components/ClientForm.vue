@@ -52,7 +52,7 @@ import type { FormSubmitEvent } from '#ui/types'
 
 const { postPeople } = useFirestore()
 
-const cities = ['NY', 'NJ', 'PA']
+const cities = ['New York', 'New Jersey', 'Connecticut']
 const service = ['Recojer', 'Estimado', 'Mudanza']
 // const selected = [
 //     'recojer',
@@ -74,7 +74,7 @@ type Schema = z.output<typeof schema>
 const initialState = {
     name: undefined,
     zipcode: undefined,
-    location: undefined,
+    location: 'New York',
     phone: undefined,
     service: 'Recojer'
 }
