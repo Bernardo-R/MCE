@@ -34,18 +34,18 @@ export default defineNuxtConfig({
       appId: "1:192337920653:web:46bcea586399af4986d8c4"
     }
   },
-  routeRules: {
-    "/": { prerender: true },
-    "/admin/**": { ssr: false },
-    "/login": { ssr: false },
-    "/register": { ssr: false },
-  },
-
-  // target: 'static',
-  // ssr: false,
-  // generate: {
-  //   fallback: true
+  // routeRules: {
+  //   "/": { prerender: true },
+  //   "/admin/**": { ssr: false },
+  //   "/login": { ssr: false },
+  //   // "/register": { ssr: false },
   // },
+
+  target: 'static',
+  ssr: false,
+  generate: {
+    fallback: true
+  },
 })
 
 // apiKey: process.env.FIRE_APIKEY,
