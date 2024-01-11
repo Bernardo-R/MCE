@@ -46,11 +46,11 @@ const columns = [{
 }]
 
 const items = (row) => [
-    [{
-        label: 'Edit',
-        icon: 'i-heroicons-pencil-square-20-solid',
-        click: () => console.log('Edit', row.id)
-    }],
+    // [{
+    //     label: 'Edit',
+    //     icon: 'i-heroicons-pencil-square-20-solid',
+    //     click: () => console.log('Edit', row.id)
+    // }],
     [{
         label: 'Delete',
         icon: 'i-heroicons-trash-20-solid',
@@ -83,10 +83,10 @@ const selected = ref([])
                         <div class="relative">
                             <UTable :rows="peoples" :columns="columns">
                                 <template #actions-data="{ row }">
-                                    <UDropdown :items="items(row)">
-                                        <UButton color="gray" variant="ghost"
-                                            icon="i-heroicons-ellipsis-horizontal-20-solid" />
-                                    </UDropdown>
+
+                                    <UButton :items="items(row)" color="gray" variant="ghost"
+                                        icon="i-heroicons-trash-20-solid" @click="deletePeople(row.id)" />
+
                                 </template>
                             </UTable>
                         </div>

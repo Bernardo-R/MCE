@@ -1,0 +1,1 @@
+import{ao as r,ap as s,Y as i}from"./entry.de730563.js";import{u as n}from"./useFirebaseAuth.544cd7f4.js";const d=r(async(a,u)=>{let e,t;console.log("middelware is active");const{curretnUserPromise:o}=n();if(!([e,t]=s(()=>o()),e=await e,t(),e)&&a.path!=="/login")return i("/login")});export{d as default};

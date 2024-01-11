@@ -33,6 +33,7 @@
                 <UButton type="submit"
                     class="flex w-full justify-center rounded-md bg-blue-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500">
                     Submit
+                    <!-- <Alert /> -->
                 </UButton>
             </UForm>
 
@@ -50,6 +51,7 @@
 import { z } from 'zod'
 import type { FormSubmitEvent } from '#ui/types'
 
+
 const { postPeople } = useFirestore()
 
 const cities = ['New York', 'New Jersey', 'Connecticut']
@@ -64,7 +66,7 @@ const service = ['Recojer', 'Estimado', 'Mudanza']
 const schema = z.object({
     name: z.string().min(3, 'Muy corto'),
     location: z.enum(cities),
-    zipcode: z.string().min(5, 'Must be at least 5 characters'),
+    zipcode: z.string().min(5, 'Must be 5 characters'),
     phone: z.string().min(8, 'Must be at least 8 characters'),
     service: z.enum(service)
 })
@@ -83,6 +85,7 @@ const state = ref({
 })
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
+
     await postPeople({
         name: event.data.name,
         zipcode: event.data.zipcode,
@@ -91,10 +94,11 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         service: event.data.service
     })
 
-    console.log(event.data);
+    // console.log(event.data);
     state.value = {
         ...initialState
     }
+
 }
 
 </script>

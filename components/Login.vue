@@ -54,7 +54,7 @@ const state = ref({
 })
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-    console.log(event.data)
+    // console.log(event.data)
 
     try {
 
