@@ -1,5 +1,5 @@
 <template>
-    <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="flex min-h-full flex-1 flex-col justify-center px-6 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <!-- <img class="mx-auto h-10 w-auto" src="../assets/imgs/MCE_logo.png" alt="Your Company" /> -->
             <h2 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Agrega tus datos
@@ -42,6 +42,7 @@
                 <a href="#" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">347-406-8005
                 </a>
             </p>
+            <!-- <Notification v-if="showNotification" :message="notificationMessage" @dismiss="dismissNotification" /> -->
         </div>
     </div>
 </template>
@@ -49,8 +50,10 @@
 <script setup lang="ts">
 import { z } from 'zod'
 import type { FormSubmitEvent } from '#ui/types'
+import { ref } from 'vue'
 
 const { postPeople } = useFirestore()
+const toast = useToast()
 
 const cities = ['New York', 'New Jersey', 'Connecticut']
 const service = ['Recojer', 'Estimado', 'Mudanza']
@@ -67,7 +70,7 @@ const schema = z.object({
     zipcode: z.string().min(5, 'Must be at least 5 characters'),
     phone: z.string().min(8, 'Must be at least 8 characters'),
     service: z.enum(service)
-})
+});
 
 type Schema = z.output<typeof schema>
 
@@ -80,7 +83,7 @@ const initialState = {
 }
 const state = ref({
     ...initialState
-})
+});
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
     await postPeople({
@@ -90,11 +93,15 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         phone: event.data.phone,
         service: event.data.service
     })
+    toast.add({
+        title: 'Gracias! Le contactaremos pronto',
+        timeout: 2500,
+        color: 'red',
+        callback: async () => {
+            state.value = { ...initialState };
+        }
+    })
 
-    console.log(event.data);
-    state.value = {
-        ...initialState
-    }
 }
 
 </script>
