@@ -22,7 +22,7 @@ import { defineComponent, h } from 'vue'
 const navigation = [
     {
         name: 'Facebook',
-        href: 'https://www.facebook.com/marycargoexpress',
+        href: 'https://www.facebook.com/Marycargoxpress/',
         icon: defineComponent({
             render: () =>
                 h('svg', { fill: 'currentColor', viewBox: '0 0 24 24' }, [

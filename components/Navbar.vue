@@ -26,16 +26,16 @@
 
                     </div>
                 </div>
-                <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <!-- <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <button type="button"
                         class="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                         <span class="absolute -inset-1.5" />
                         <span class="sr-only">Rastrea tu envio</span>
                         <TruckIcon class="h-8 w-8" aria-hidden="true" />
-                    </button>
+                    </button> -->
 
-                    <!-- Profile dropdown -->
-                    <!-- <Menu as="div" class="relative ml-3">
+                <!-- Profile dropdown -->
+                <!-- <Menu as="div" class="relative ml-3">
                         <div>
                             <MenuButton
                                 class="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
@@ -70,7 +70,7 @@
                             </MenuItems>
                         </transition>
                     </Menu> -->
-                </div>
+                <!-- </div> -->
             </div>
         </div>
 
