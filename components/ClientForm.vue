@@ -95,8 +95,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     })
     toast.add({
         title: 'Gracias! Le contactaremos pronto',
-        timeout: 2500,
-        color: 'red',
+        timeout: 1500,
+        color: 'blue',
         callback: async () => {
             state.value = { ...initialState };
         }

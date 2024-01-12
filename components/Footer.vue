@@ -8,9 +8,10 @@
                 </a>
             </div>
             <div class="mt-8 md:order-1 md:mt-0">
-                <p class="text-center text-xs leading-5 text-gray-500">&copy; 2023 Mary Cargo Express, Inc. All rights
+                <span class="text-center text-xs leading-5 text-gray-500">&copy; {{ new Date().getFullYear() }} Mary Cargo
+                    Express, Corp. All rights
                     reserved.
-                </p>
+                </span>
             </div>
         </div>
     </footer>
