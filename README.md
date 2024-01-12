@@ -34,8 +34,6 @@ Make sure you have the following installed before running the project:
 
 ### Installation
 
-Follow these steps to set up and run the Tea Time project:
-
 1. Clone the repository:
 
    ```bash
@@ -45,7 +43,7 @@ Follow these steps to set up and run the Tea Time project:
 2. Navigate to the project folder:
 
    ```bash
-   cd tea-time
+   cd MCE
    ```
 
 3. Install dependencies:
